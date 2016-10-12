@@ -1,1 +1,30 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><title>gmframe</title><link href=/static/css/app.39b13024cfddf4be0897b467ba9f7dfe.css rel=stylesheet></head><body><app></app><script type=text/javascript src=/static/js/manifest.29596402e35450161cd8.js></script><script type=text/javascript src=/static/js/vendor.d90bde71f1ab3867b67f.js></script><script type=text/javascript src=/static/js/app.6c18dbf6f2affad47253.js></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>工具集合</title>
+</head>
+<body>
+<a href="javascript:void(0)">生成txt文件</a>
+<div class="modal-footer">
+  <a onfocus="this.blur();" id="createInvoteBtn" class="ipt-todo" href="javascript:void(0)">生成并导出Txt文件</a>
+  <a onfocus="this.blur();" download="code.txt" id="createInvote" class="ipt-todo hide" >code</a>
+</div>
+<script>
+  var isIE = (navigator.userAgent.indexOf('MSIE') >= 0);
+  if (isIE) {
+    var strHTML = _txt;
+    var winSave = window.open();
+    winSave.document.open("text","utf-8");
+    winSave.document.write(strHTML);
+    winSave.document.execCommand("SaveAs",true,"code.txt");
+    winSave.close();
+  } else {
+    var elHtml = _txt;
+    var mimeType =  'text/plain';
+    $('#createInvote').attr('href', 'data:' + mimeType  +  ';charset=utf-8,' + encodeURIComponent(elHtml));
+    document.getElementById('createInvote').click();
+  }
+</script>
+</body>
+</html>
