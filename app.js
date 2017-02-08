@@ -1,27 +1,11 @@
 var fs = require("fs"),
 	http = require("http"),
 	_url = require('url'),
-	toEn = require('./models/toPinyin'),
-	newsTime = require('./models/newsTime'),
+	writeFiles = require('./models/markHtml'),
+	travel = require('./models/travelDir'),
+	dir = require('./models/conf'),
 	iconv = require('iconv-lite'),
-	path=require('path');
-
-//获取内容
-function readFilesTpl(ArrKeywordsDetail) {
-	//读取模板
-	var tpl, data, html;
-	tpl = fs.readFileSync('tpl.html').toString();
-	data = fs.readFileSync("markHtmlCore/content.txt").toString();
-	//	tpl = fs.readFileSync("tpl.html", "utf-8");
-	//	console.log(data)
-	html = tpl.replace(/{{content}}/, data)
-		.replace(/{{title}}/, ArrKeywordsDetail)
-		.replace(/{{keywords}}/, ArrKeywordsDetail)
-		.replace(/{{description}}/, ArrKeywordsDetail) //description
-		.replace(/{{time}}/, newsTime); //description
-
-	return html;
-}
+	path = require('path');
 
 //获取关键词
 function readFilesKey() {
@@ -29,40 +13,69 @@ function readFilesKey() {
 	return data.split('\r\n');
 }
 
-//生成html
-function writeFiles(ArrKeywords) {
-	this.ArrKeywords = ArrKeywords || [];
-
-	var p = Math.floor(Math.random() * (12 - 4) + 4) //随机段落
-
-	for(var i = 0; i < this.ArrKeywords.length; i++) {
-		var buf = readFilesTpl(this.ArrKeywords[i]);
-		fs.writeFileSync('html/' + toEn(this.ArrKeywords[i]) + (i + 1) + '.html', buf, 'utf8');
-		console.log('生成' + this.ArrKeywords[i] + "成功!");
-	}
-}
-
-
-//	travel("html", function(pathName) {
-//		var data=fs.readFileSync(pathName)
-//		fs.writeFileSync(pathName,iconv.decode(new Buffer(data), 'utf8'), 'utf8');
-//	})
-//递归遍历目录
-//function travel(dir, callback) {
-//	fs.readdirSync(dir).forEach(function(file) {
-//		var pathname = path.join(dir, file);
-//
-//		if(fs.statSync(pathname).isDirectory()) {
-//			travel(pathname, callback);
-//		} else {
-//			callback(pathname);
-//		}
-//	});
-//}
-
 http.createServer(function(req, res) {
-	console.log(req.url)
-	writeFiles(readFilesKey())
+	var _url = req.url == '/' || req.url == '/favicon.ico' || req.url == '/start' ? req.url : req.url;
+	_url = _url || '404';
+	console.log(_url)
+	switch(_url) {
+		case '' || '/':
+			res.writeHead(200, {
+				'Content-type': 'text/html'
+			});
+			res.end('<a href="/start">开始生成</a><br/>');
+			break;
+		case '/favicon.ico':
+			return;
+			break;
+		case '/start':
+			//检查文件夹
+			if(dir.markDir == 'markHtmlCore' || dir.markDir == 'models') {
+				res.writeHead(200, {'Content-type': 'text/html'});
+				return res.end('目录设置有问题,不能与已有目录冲突!请在model/conf.js中修改目录名称')
+			}
+			
+			//开始生成
+			writeFiles(readFilesKey())
+				//返回页面给前台
+			res.writeHead(200, {
+				'Content-type': 'text/html'
+			});
+			res.end('<h2 style="color:green">生成成功!</h2><br/><a href="' + '/' + dir.markDir + '/index.html' + '">点击查看生成文章</a>');
+			break;
+		case '/' + dir.markDir + '/index.html':
+			res.writeHead(200, {
+				'Content-type': 'text/html'
+			});
+			res.end(fs.readFileSync(dir.markDir + '/index.html'));
+			break;
+		case _url:
+			var talg;
+			travel(dir.markDir + '/' + dir.subDir, function(file) {
+				if(file.substr(dir.markDir.length + dir.subDir.length + 2) == _url.substr(dir.markDir.length + dir.subDir.length + 3)) {
+					talg = file;
+				}
+			});
+
+			if(talg) {
+				res.writeHead(200, {
+					'Content-type': 'text/html'
+				});
+				res.end(fs.readFileSync(talg));
+			} else {
+				res.writeHead(200, {
+					'Content-type': 'text/html'
+				});
+				res.end("404");
+			}
+
+			break;
+		default:
+			res.writeHead(200, {
+				'Content-type': 'text/html'
+			});
+			res.end(404);
+			break;
+	}
 
 }).listen(3356, '127.0.0.1');
 console.log("Server running")
