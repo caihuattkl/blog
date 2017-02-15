@@ -5,7 +5,8 @@
   "main": "app.js",
   "dependencies": {
     "bufferhelper": "^0.2.1",
-    "iconv-lite": "^0.4.15"
+    "iconv-lite": "^0.4.15",
+    "node-readability": "^2.2.0"
   },
   "devDependencies": {},
   "scripts": {

@@ -12,10 +12,11 @@ function readFilesTpl(keywords) {
 	//读取模板
 	var tpl, data, html,randomSpanArr=[],tmp,p,pSize;
 	tpl = fs.readFileSync('tpl.html').toString();
-	data = fs.readFileSync("markHtmlCore/2.txt").toString();
+	data = fs.readFileSync("markHtmlCore/3.txt").toString();
 	
 	//随机抽取段落
-	tmp=data.split(/\\r|\r/);
+	tmp=data.split(/\n/);
+	console.log(tmp)
 	//每篇文章随机段落
 	pSize=Math.floor(Math.random()*(13-5+1)+5);
 	while(randomSpanArr.length<pSize){
