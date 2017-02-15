@@ -10,7 +10,7 @@ module.exports=function(){
 	hh=currentTime.getHours()<10?'0'+currentTime.getHours():currentTime.getHours();
 	mm=currentTime.getMinutes()<10?'0'+currentTime.getMinutes():currentTime.getMinutes();
 	ss=currentTime.getSeconds();
-	_mm=Math.floor(Math.random()*((mm+3)-mm)+mm);
+	_mm=Math.floor(Math.random()*(mm+3)+mm);
 	tmm=_mm<10?'0'+_mm:_mm;//补位0
 	return currentTime.getFullYear()+"-"+MM+"-"+dd+" "+hh+":"+tmm
 	

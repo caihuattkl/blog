@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			var str = '我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段<strong>老师好</strong>文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!我是一段文本!';
+			var key = "<strong>老师好</strong>";
+
+			for(var i = 0; i < 5; i++) {
+				rm = Math.floor(Math.random() * 100 + 10);
+				tmp = str.charAt(rm);
+				tmp = tmp + key;
+				//如果文章中没有关键词,就先插入一个
+				if(str.match(key)==null) {
+					str = str.replace(eval('/(.{' + rm + '})/'), '$1' + tmp);
+				}
+				
+				//如果文章中有关键词,有几个关键词,计算区间段
+				if(str.match(key).length){
+					arr=seachPosition(key)
+					calcP(str,arr,arr.length+1)
+				}
+			}
+			
+			console.log(str)
+					
+			function seachPosition(key) {
+				var p = -1,arr = [];
+				while((p = str.indexOf(key, p + 1)) != -1) {
+					arr.push(p)
+				}
+				return arr;
+			}
+			
+			function calcP(str,arr,p) {
+				
+				rm1 = Math.floor(Math.random() * str.length-arr[0]+str.length-(str.length-arr[0]))
+//				console.log(rm1)
+//				console.log(str.length-arr[0],str.length-(str.length-arr[0]))
+				key1 = str.charAt(rm1);
+				key1 = key1 + key;
+				str = str.replace(eval('/(.{' +rm1+ '})/'), '$1' + key1);
+				
+				
+//				var tmp=[];
+//				for(var i=0;i<arr.length;i++){
+//					tmp.push(str.length)
+//				}
+			}
+		</script>
+	</body>
+
+</html>

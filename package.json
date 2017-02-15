@@ -4,6 +4,7 @@
   "description": "生成html文件",
   "main": "app.js",
   "dependencies": {
+    "bufferhelper": "^0.2.1",
     "iconv-lite": "^0.4.15"
   },
   "devDependencies": {},

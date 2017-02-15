@@ -3,15 +3,13 @@ var fs = require("fs"),
 	_url = require('url'),
 	writeFiles = require('./models/markHtml'),
 	travel = require('./models/travelDir'),
+	getKey=require('./models/setKeywords'),
 	dir = require('./models/conf'),
 	iconv = require('iconv-lite'),
 	path = require('path');
+require('./models/spiders.sina')();
 
-//获取关键词
-function readFilesKey() {
-	var data = fs.readFileSync("markHtmlCore/keywords.txt", "utf8");
-	return data.split('\r\n');
-}
+
 
 http.createServer(function(req, res) {
 	var _url = req.url == '/' || req.url == '/favicon.ico' || req.url == '/start' ? req.url : req.url;
@@ -23,6 +21,7 @@ http.createServer(function(req, res) {
 				'Content-type': 'text/html'
 			});
 			res.end('<a href="/start">开始生成</a><br/>');
+			
 			break;
 		case '/favicon.ico':
 			return;
@@ -31,11 +30,11 @@ http.createServer(function(req, res) {
 			//检查文件夹
 			if(dir.markDir == 'markHtmlCore' || dir.markDir == 'models') {
 				res.writeHead(200, {'Content-type': 'text/html'});
-				return res.end('目录设置有问题,不能与已有目录冲突!请在model/conf.js中修改目录名称')
+				return res.end('<script>alert("目录设置有问题,不能与已有目录冲突!请在model/conf.js中修改目录名称");history.go(-1)</script>')
 			}
 			
 			//开始生成
-			writeFiles(readFilesKey())
+			writeFiles(getKey(fs))
 				//返回页面给前台
 			res.writeHead(200, {
 				'Content-type': 'text/html'
