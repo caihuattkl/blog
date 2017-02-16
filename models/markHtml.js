@@ -16,7 +16,6 @@ function readFilesTpl(keywords) {
 	
 	//随机抽取段落
 	tmp=data.split(/\n/);
-	console.log(tmp)
 	//每篇文章随机段落
 	pSize=Math.floor(Math.random()*(13-5+1)+5);
 	while(randomSpanArr.length<pSize){
@@ -71,14 +70,15 @@ function markContent() {
 		strNewsList = '',
 		strNewsData;
 	arr.sort(asc).forEach(function(v, i) {
-		strNewsList += '<li>' + '<a href="' + v.url.substr(dir.markDir.length + 1) + '">' + v.title + '</a> ' + v.time.split(/\d{4}-/)[1] + '</li>' + '\n';
+		console.log(v.url)
+		strNewsList += '<li>' + '<a href="/' + v.url.substr(dir.markDir.length +dir.subDir+2) + '">' + v.title + '</a> ' + v.time.split(/\d{4}-/)[1] + '</li>' + '\n';
 		//去掉末尾换行
 		if(arr.length - 1 == i) {
 			strNewsList = strNewsList.replace(/\n$/, '')
 		}
 	})
 	strNewsData = index.replace(/{{list}}/g, strNewsList); //newsList
-	fs.writeFileSync(dir.markDir + '/index.html', strNewsData, 'utf8');
+	fs.writeFileSync(dir.markDir +'/'+dir.subDir + '/index.html', strNewsData, 'utf8');
 	console.log("生成完成!")
 
 }

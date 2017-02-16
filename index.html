@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#loading {
+				display: flex;
+				display: none;
+				width: 100%;
+				height: 100%;
+				text-align:center;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				z-index: 10000;
+				background-color: black;
+				opacity: .6;
+				color: #fff;
+			}
+			
+			#loading #cc {
+				width: 300px;
+				height: 300px;
+				display: flex;
+				margin: auto;
+				justify-content:center;
+				flex-direction:column;
+			}
+			#loading #cc img{
+				width:100px;
+				height:100px;
+				vertical-align: middle;
+				margin:0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<a id="spidersSina" href="javascript:void(0)">1.抓取新浪新闻做内容源</a><br/>
+		<a href="/start">2.开始生成html</a><br/>
+		<div id="loading">
+			<div id="cc">
+				<img src="http://samherbert.net/svg-loaders/svg-loaders/bars.svg" alt="loding" />文本抓取中!请稍候...
+			</div>
+		</div>
+		<script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$("#spidersSina").click(function() {
+				$.ajax({
+					type: "get",
+					url: "/spidersSina",
+					timeout : 1000*60*5, //超时时间设置，单位毫秒
+					async: true,
+					complete: function(res) {
+						if(res.statusText=='timeout'){
+							alert('请求超时,请重新发送!')
+						}
+						$("#loading").hide();
+					},
+					beforeSend: function() {
+						$("#loading").show();
+					},
+					success: function(res) {
+						alert(res.message)
+					},
+					error: function(err) {
+						alert(err)
+					}
+				});
+			})
+		</script>
+	</body>
+
+</html>

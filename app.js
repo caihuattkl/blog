@@ -7,21 +7,19 @@ var fs = require("fs"),
 	dir = require('./models/conf'),
 	iconv = require('iconv-lite'),
 	path = require('path');
-	require('./models/spiders.sina')();
+	
 
 
 
 http.createServer(function(req, res) {
-	var _url = req.url == '/' || req.url == '/favicon.ico' || req.url == '/start' ? req.url : req.url;
+	var _url = req.url == '/' || req.url == '/favicon.ico' ||req.url=='/spidersSina'|| req.url == '/start' ? req.url : req.url;
 	_url = _url || '404';
 	console.log(_url)
 	switch(_url) {
 		case '' || '/':
-			res.writeHead(200, {
-				'Content-type': 'text/html'
-			});
-			res.end('<a href="/start">开始生成</a><br/>');
-			
+			res.writeHead(200, {'Content-type': 'text/html'});
+			res.end(fs.readFileSync(__dirname + '/index.html'))
+			res.end('<a href="/spidersSina">抓取新浪新闻做内容源</a><br/><a href="/start">开始生成</a><br/>');
 			break;
 		case '/favicon.ico':
 			return;
@@ -39,12 +37,13 @@ http.createServer(function(req, res) {
 			res.writeHead(200, {
 				'Content-type': 'text/html'
 			});
-			res.end('<h2 style="color:green">生成成功!</h2><br/><a href="' + '/' + dir.markDir + '/index.html' + '">点击查看生成文章</a>');
+			res.end('<h2 style="color:green">生成成功!</h2><br/><a href="/' +dir.markDir+'/'+dir.subDir + '/index.html' + '">点击查看生成文章</a>');
+			break;
+		case '/spidersSina':
+			require('./models/spiders.sina')(req,res);
 			break;
 		case '/' + dir.markDir + '/index.html':
-			res.writeHead(200, {
-				'Content-type': 'text/html'
-			});
+			res.writeHead(200, {'Content-type': 'text/html'});
 			res.end(fs.readFileSync(dir.markDir + '/index.html'));
 			break;
 		case _url:
@@ -54,11 +53,8 @@ http.createServer(function(req, res) {
 					talg = file;
 				}
 			});
-
 			if(talg) {
-				res.writeHead(200, {
-					'Content-type': 'text/html'
-				});
+				res.writeHead(200, {'Content-type': 'text/html'});
 				res.end(fs.readFileSync(talg));
 			} else {
 				res.writeHead(200, {
