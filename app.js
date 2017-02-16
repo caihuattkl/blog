@@ -7,7 +7,7 @@ var fs = require("fs"),
 	dir = require('./models/conf'),
 	iconv = require('iconv-lite'),
 	path = require('path');
-require('./models/spiders.sina')();
+	require('./models/spiders.sina')();
 
 
 

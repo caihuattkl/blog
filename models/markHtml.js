@@ -12,7 +12,7 @@ function readFilesTpl(keywords) {
 	//读取模板
 	var tpl, data, html,randomSpanArr=[],tmp,p,pSize;
 	tpl = fs.readFileSync('tpl.html').toString();
-	data = fs.readFileSync("markHtmlCore/3.txt").toString();
+	data = fs.readFileSync("markHtmlCore/content.txt").toString();
 	
 	//随机抽取段落
 	tmp=data.split(/\n/);

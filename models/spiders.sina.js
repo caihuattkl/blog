@@ -1,29 +1,26 @@
 var spiders = require("../spiders/spiders.lib");
 var tools = require("./tools")();
 var read = require('../spiders/readability.lib');
-var fs=require('fs');
+var fs = require('fs');
+var read2 = require('node-readability');
 
 function spiderSina() {
-	var tmpArr = [],newsList;
-	urlList = 'http://roll.news.sina.com.cn/interface/rollnews_ch_out_interface.php?col=97&spec=&type=&ch=01&k=&offset_page=0&offset_num=0&num=300&asc=&page=1';
-
-	spiders(urlList, 'gb2312').then(res => {
-		//获取新闻所有url
-		newsList = res.match(/http\:\/\/[^<>\"]*?\.html|http\:\/\/[^<>\"]*?\.shtml/g);
-		var c1;
-		//进去每条新闻内容页
-		for(var i = 0; i < newsList.length; i++) {
-			if(i <100) {
-				read(newsList[i]).then(res=>{
-					//开始写入文件 "\n当前是第"+res[0]+"记录: \n"+
-				fs.writeFileSync('markHtmlCore/3.txt', res[1], {flag: 'a'},'utf8');
-				});
+	var tmpArr = [],newsArr;urlSource = 'http://roll.news.sina.com.cn/interface/rollnews_ch_out_interface.php?col=97&spec=&type=&ch=01&k=&offset_page=0&offset_num=0&num=300&asc=&page=1';
+	spiders(urlSource, 'gb2312').then(res => {
+		//获取新闻内容页所有url
+		newsArr = res.match(/http\:\/\/[^<>\"]*?\.html|http\:\/\/[^<>\"]*?\.shtml/g);
+		
+		for(var i=1;i<newsArr.length;i++){
+			if(i<10){
+				tmpArr.push(read(newsArr[i]));
 			}
 		}
-		console.log("写入文章内容完成!")
+		Promise.all(tmpArr).then(res=>{
+			console.log(res[1])
+		})
 		
 	}).catch(err => {
-		throw new Error("获取新闻列表网址错误!" + err);
+		throw new Error("获取新闻列表网址错误！" + err);
 	})
 
 }
