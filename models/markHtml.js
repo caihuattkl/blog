@@ -4,27 +4,32 @@ var fs = require("fs"),
 	travel = require('./travelDir'),
 	asc = require('./ascSort'),
 	relRead = require('./relatedRead'),
-	insertWord=require('./inerKeyfn'),
-	dir = require('./conf'); //生成目录
-
+	insertWord = require('./inerKeyfn'),
+	dir = require('./conf'), //目录相关配置文件
+	iconv = require("iconv-lite");
 //获取内容
 function readFilesTpl(keywords) {
 	//读取模板
-	var tpl, data, html,randomSpanArr=[],tmp,p,pSize;
-	tpl = fs.readFileSync('tpl.html').toString();
+	var tpl, data, html, randomSpanArr = [],
+		tmp, p, pSize;
+	if(dir.tpl == 'tpl.html') {
+		tpl = fs.readFileSync(dir.tpl).toString();
+	} else {
+		tpl = fs.readFileSync(dir.tpl).toString();
+	}
 	data = fs.readFileSync("markHtmlCore/content.txt").toString();
-	
+
 	//随机抽取段落
-	tmp=data.split(/\n/);
+	tmp = data.split(/\n/);
 	//每篇文章随机段落
-	pSize=Math.floor(Math.random()*(13-5+1)+5);
-	while(randomSpanArr.length<pSize){
-		p=Math.floor(Math.random()*(100-1+1)+1);
+	pSize = Math.floor(Math.random() * (13 - 5 + 1) + 5);
+	while(randomSpanArr.length < pSize) {
+		p = Math.floor(Math.random() * (100 - 1 + 1) + 1);
 		randomSpanArr.push(tmp[p])
 	}
 	p = randomSpanArr.join('</p><p>　　');
 	//插入关键词
-	data = insertWord.insertWord(insertWord.wordSize(keywords,dir.keyItem), '<p>　　' + p + '</p>')
+	data = insertWord.insertWord(insertWord.wordSize(keywords, dir.keyItem), '<p>　　' + p + '</p>')
 
 	html = tpl.replace(/{{content}}/, data)
 		.replace(/{{title}}/g, keywords)
@@ -51,14 +56,13 @@ function markContent() {
 	var arr = [];
 	travel(dir.markDir + '/' + dir.subDir, function(file) {
 		//过滤索引页
+		var obj = {};
+			obj.url = file;
 		if(file.substr(dir.markDir.length + dir.subDir.length + 2) == "index.html") return;
 		//获取时间,排序
-		var obj = {};
-		obj.url = file;
 		obj.time = fs.readFileSync(file).toString().match(/[\d]{0,4}-[\d]{0,2}-[\d]{0,2}\s+[\d]{0,2}:[\d]{0,2}/g)[0];
-		obj.title = /<title>(.+?)(?:-|\|\S|\s).+?<\/title>/gi.exec(fs.readFileSync(file).toString())[1];
-		//		obj.content = /<div class="cont fontst defSize" id="ncontent">([\S\s]+?)<\/div>/gi.exec(fs.readFileSync(file).toString())[1];
-		obj.description = /<div class="cont fontst defSize" id="ncontent">([\S\s]+?)<\/div>/gi.exec(fs.readFileSync(file).toString())[1].substr(0, 50);
+			obj.title = /<title>(.+?)(?:-|\|\S|\s).+?<\/title>/gi.exec(fs.readFileSync(file).toString())[1];
+			obj.description = /<div class="cont fontst defSize" id="ncontent">([\S\s]+?)<\/div>/gi.exec(fs.readFileSync(file).toString())[1].substr(0, 50);
 		arr.push(obj)
 	});
 
@@ -71,14 +75,14 @@ function markContent() {
 		strNewsData;
 	arr.sort(asc).forEach(function(v, i) {
 		console.log(v.url)
-		strNewsList += '<li>' + '<a href="/' + v.url.substr(dir.markDir.length +dir.subDir+2) + '">' + v.title + '</a> ' + v.time.split(/\d{4}-/)[1] + '</li>' + '\n';
+		strNewsList += '<li>' + '<a href="/' + v.url.substr(dir.markDir.length + dir.subDir + 2) + '">' + v.title + '</a> ' + v.time.split(/\d{4}-/)[1] + '</li>' + '\n';
 		//去掉末尾换行
 		if(arr.length - 1 == i) {
 			strNewsList = strNewsList.replace(/\n$/, '')
 		}
 	})
 	strNewsData = index.replace(/{{list}}/g, strNewsList); //newsList
-	fs.writeFileSync(dir.markDir +'/'+dir.subDir + '/index.html', strNewsData, 'utf8');
+	fs.writeFileSync(dir.markDir + '/' + dir.subDir + '/index.html', strNewsData, 'utf8');
 	console.log("生成完成!")
 
 }
@@ -86,7 +90,6 @@ function markContent() {
 module.exports = function(ArrKeywords) {
 	this.ArrKeywords = ArrKeywords || [];
 	var p = Math.floor(Math.random() * (12 - 4) + 4) //随机段落
-
 	//判断目录是否存在
 	if(!fs.existsSync(dir.markDir)) {
 		//生成内容页

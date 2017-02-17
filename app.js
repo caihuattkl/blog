@@ -8,9 +8,6 @@ var fs = require("fs"),
 	iconv = require('iconv-lite'),
 	path = require('path');
 	
-
-
-
 http.createServer(function(req, res) {
 	var _url = req.url == '/' || req.url == '/favicon.ico' ||req.url=='/spidersSina'|| req.url == '/start' ? req.url : req.url;
 	_url = _url || '404';

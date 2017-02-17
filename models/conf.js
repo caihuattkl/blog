@@ -10,4 +10,5 @@ module.exports = {
 	relReadItem:"5",
 	keyItem:"5",//每篇文章插入主关键词的数量
 	newsItem:100,//抓取用于作为源文件的新闻数量.最好不好大于100 否则生成速度会受影响
+	tpl:'tpl_gbk.html'//如果网页编码是gb2312 请替换此模板文件.utf-8则替换tpl.html
 }

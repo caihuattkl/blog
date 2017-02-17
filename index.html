@@ -25,13 +25,12 @@
 				height: 300px;
 				display: flex;
 				margin: auto;
-				justify-content:center;
+				justify-content:flex-end;
 				flex-direction:column;
 			}
 			#loading #cc img{
 				width:100px;
 				height:100px;
-				vertical-align: middle;
 				margin:0 auto;
 			}
 		</style>
@@ -67,6 +66,7 @@
 						alert(res.message)
 					},
 					error: function(err) {
+						console.log(err)
 						alert(err)
 					}
 				});
