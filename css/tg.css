@@ -1,0 +1,24 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*		新版			*/
+.tgfloat{/*position:fixed;*/ box-shadow:none; width:150px; bottom:50px; background:#f3f1f1}
+.tgfloat .r-head{padding-bottom:20px}
+.tgfloat .r-head h3{background:#d10504; font-weight:bold; height:35px; text-align:center; line-height:35px; font-size:14px; font-family:宋体; margin:0px; color:#fff}
+.tgfloat .forecom{padding:0px 23px;height:760px; background:#f3f1f1}
+.tgfloat li{height:190px !important; width:102px; /*padding:0px 0 16px;*/}
+.tgfloat .switchable-content{left:22px; top:0}
+.tgfloat li a.box-img{border:1px #e0e0e0 solid; width:100px; height:100px; margin-bottom:8px; display:block}
+.tgfloat li a.box-img:hover{border-color:#c70000; width:100px; height:100px}
+.tgfloat li .re-text{height:40px; overflow:hidden; line-height:20px}
+.tgfloat li .ad_price{font-size:16px; height:25px; font-family:verdana,arial; color:#d10504}
+.tgfloat li .ad_price em{font-weight:bold}
+.tgfloat .trun-key{height:25px}
+.trun-key a.prev,.trun-key a.promotion-prev{background-position:center 5px;width:65px}
+.trun-key a.next,.trun-key a.promotion-next{background-position:center -33px;margin-left:-1px}
+.tgfloat .trun-key a{width:73px;height:23px}
+.tgfloat .trun-key a.prev,.tgfloat .trun-key a.promotion-prev{width:74px}
+.tgmr{display:block; background:#d10504; font-size:16px; font-weight:bold; color:#fff; text-align:center; height:35px; line-height:35px}
+.tgmr span{font-weight:normal}
+.tgmr:hover,a.tgmr:visited{color:#fff; text-decoration:underline}
+
