@@ -1,0 +1,40 @@
+<div data-role="page" ng-controller="myorderCtrl">
+  <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-bar-inherit ui-header-fixed slidedown">
+    <a href="../main.html" data-role="button" data-rel="back" class="ui-btn ui-icon-carat-l ui-shadow ui-corner-all ui-btn-icon-notext"></a>
+    <a href="../tpl/myorder.html" data-icon="user" data-role="button" role="button" class="ui-btn-right ui-link ui-btn ui-icon-user ui-btn-icon-notext ui-shadow ui-corner-all"></a>
+    <h1>在线订餐</h1>
+  </div>
+  <div data-role="content">
+  <h2 class="text-center">我的订单!</h2>
+  <table data-role="table" class="ui-responsive table-stroke">
+    <thead>
+    <tr>
+      <th>编号</th>
+      <th>菜品</th>
+      <th>下单时间</th>
+      <th>联系人</th>
+      <th>联系电话</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="i in orderlist">
+      <td>3</td>
+      <td align="center">{{i.name}}</td>
+      <td>{{i.order_time|date:'yyyy-MM-dd HH:mm:ss'}}</td>
+      <td>{{i.user_name}}</td>
+      <td>{{i.phone}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="main.html" data-icon="home">首页</a></li>
+        <li><a href="myorder.html" data-icon="gear">订单</a></li>
+        <li><a href="myorder.html" data-icon="user">我</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

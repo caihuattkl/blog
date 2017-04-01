@@ -1,0 +1,23 @@
+<div ng-controller="detailCtrl" data-role="page">
+  <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-bar-inherit ui-header-fixed slidedown">
+      <a href="../main.html" data-role="button" data-rel="back" class="ui-btn ui-icon-carat-l ui-shadow ui-corner-all ui-btn-icon-notext"></a>
+      <a href="../tpl/myorder.html" data-icon="user" data-role="button" role="button" class="ui-btn-right ui-link ui-btn ui-icon-user ui-btn-icon-notext ui-shadow ui-corner-all"></a>
+  <h1>{{dish.name}}</h1>
+  </div>
+  <div data-role="content">
+    <div class="media">
+      <div class="media-body">
+        <h4>菜品名称:{{dish.name}}</h4>
+        <img ng-src="../img/{{dish.img_lg}}" class="img-responsive"/>
+
+        <p><b>主要食料:</b>{{dish.material}}</p>
+
+        <p>内容简介:{{dish.detail}}</p>
+        <span>¥{{dish.price}}</span>
+      </div>
+    </div>
+    <a data-role="button" href="order.html">我要订餐</a>
+  </div>
+
+</div>
+

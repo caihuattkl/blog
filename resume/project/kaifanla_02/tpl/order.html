@@ -1,0 +1,38 @@
+<div ng-controller="orderCtrl" data-role="page">
+  <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-bar-inherit ui-header-fixed slidedown">
+    <a href="../main.html" data-role="button" data-rel="back" class="ui-btn ui-icon-carat-l ui-shadow ui-corner-all ui-btn-icon-notext"></a>
+    <a href="../tpl/myorder.html" data-icon="user" data-role="button" role="button" class="ui-btn-right ui-link ui-btn ui-icon-user ui-btn-icon-notext ui-shadow ui-corner-all"></a>
+    <h1>在线订餐</h1>
+  </div>
+  <div data-role="content" ng-hide="orderStatus">
+    <form>
+      <div class="ui-controlgroup">
+        <label class="ui-hidden-accessible" for="user_name">联系人:</label>
+        <input type="text" id="user_name" name="user_name" placeholder="请输入联系人姓名" ng-model="order.user_name"/>
+      </div>
+      <fieldset data-role="controlgroup" data-type="horizontal" >
+        <legend>性别:</legend>
+        <label><input type="radio" name="sex" value="1" ng-model="order.sex"/>男</label>
+        <label><input type="radio" name="sex" value="2" ng-model="order.sex"/>女</label>
+      </fieldset>
+      <div class="ui-controlgroup">
+        <label class="ui-hidden-accessible" for="name">联系电话:</label>
+        <input type="text" id="name" name="phone" placeholder="请输入手机号码" ng-model="order.phone"/>
+      </div>
+      <div class="ui-controlgroup">
+        <label for="addr">送餐地址:</label>
+        <textarea id="addr" name="addr" placeholder="请输入联系地址" ng-model="order.addr"></textarea>
+      </div>
+    </form>
+    <button data-role="button" ng-click="Kforder()">确定下单</button>
+  </div>
+
+  <div ng-show="orderStatus">
+    <div data-role="content">
+      <div>下单成功,您的订单编号是:{{order.pid}}</div>
+    </div>
+  </div>
+
+</div>
+
+

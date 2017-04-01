@@ -1,0 +1,362 @@
+@import "bootstrap.less";
+
+body {
+  margin-top: @navbar-height;
+}
+
+.logo {
+  display: inline-block;
+  width: 63px;
+  height: 42px;
+  background: url("../img/hdr-spr.png") 0px -512px;
+  margin-top: -11px;
+}
+
+.serv {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.rberMe {
+  display: inline-block;
+  width: 0px;
+  padding-left: 20px;
+  color: #ffffff;
+  font-size: 12px;
+}
+//登陆框 背景色设置
+.drobj{
+  background:#fff;
+  width: 300px;
+}
+@media screen and (max-width: 767px) {
+  .navbar-nav .open .drobj{
+    background-color:#fff;
+  }
+}
+//main
+.content {
+  background: @blue-dark;
+  color: @text-color-light;
+  a {
+    color: @text-color-light;
+    &:hover {
+      color: @blue-lighter;
+    }
+  }
+  > .container > .row {
+    margin-bottom: 20px;
+  }
+}
+
+.checkbox {
+  > label {
+    font-size: 8px;
+    line-height: 20px;
+    color: @blue-lighter;
+  }
+}
+
+.img-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: rgba(0, 0, 0, .6);
+  color: #fff;
+  cursor: pointer;
+  top: 80%;
+  transition: top .15s linear;
+  padding: 0px 10px;
+  &:hover {
+    top: 0;
+    transition: top .15s linear;
+  }
+}
+
+//针对pc屏幕
+@media screen and (min-width: 992px) {
+  .mask-container {
+    position: relative;
+    overflow: hidden;
+    .box-pc-shadow;
+    position:relative;
+    .img-leftBanner-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+      cursor: pointer;
+      top: 60%;
+      padding: 0px 20px;
+    }
+  }
+  .media-box {
+    .box-pc-shadow;
+    .box-top;
+    padding: 22px 20px;
+    background:@blue-light;
+    .media-left {
+      border-right: 2px solid @blue-lighter;
+      padding: 20px 10px;
+    }
+    .media {
+      >.media-body {
+        padding: 0px 10px;
+        > ul > li {
+          line-height: 28.9px;
+        }
+      }
+    }
+  }
+  .media-box1 {
+    .box-pc-shadow;
+    padding: 21px 20px;
+    background:@blue-light;
+    .media-left {
+      border-right: 2px solid @blue-lighter;
+      padding: 20px 10px;
+    }
+    .media {
+      >.media-body {
+        padding: 0px 10px;
+        > ul > li {
+          line-height: 28.9px;
+        }
+      }
+    }
+  }
+  .mask-container1 {
+    position: relative;
+    overflow: hidden;
+    .box-top;
+    .box-pc-shadow;
+    position:relative;
+    .img-leftBanner-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+      cursor: pointer;
+      top: 60%;
+      padding: 0px 20px;
+    }
+  }
+}
+
+/*针对PAD屏幕(768~992px)而设定的样式*/
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .content {
+    background: @blue-dark;
+    color: @text-color-light;
+    a {
+      color: @text-color-light;
+      &:hover {
+        color: @blue-lighter;
+      }
+    }
+  }
+  .content > .container > .row{margin-bottom:0px;}
+  .content > .container > .row:last-child{margin-bottom:20px;}
+  .mask-container {
+    position: relative;
+    overflow: hidden;
+    .box-shadow-phone;
+    .box-top-phone;
+    position:relative;
+    .img-leftBanner-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+      cursor: pointer;
+      top: 60%;
+      padding: 0px 20px;
+    }
+  }
+  .media-box {
+    .box-shadow-phone;
+    .box-top-phone;
+    padding: 22px 20px;
+    background:@blue-light;
+    .media-left {
+      border-right: 2px solid @blue-lighter;
+      padding: 20px 10px;
+    }
+    .media {
+      >.media-body {
+        padding: 0px 10px;
+        > ul > li {
+          line-height: 28.9px;
+        }
+      }
+    }
+  }
+  .media-box1 {
+    .box-shadow-phone;
+    .box-top-phone;
+    padding: 21px 20px;
+    background:@blue-light;
+    .media-left {
+      border-right: 2px solid @blue-lighter;
+      padding: 20px 10px;
+    }
+    .media {
+      >.media-body {
+        padding: 0px 10px;
+        > ul > li {
+          line-height: 28.9px;
+        }
+      }
+    }
+  }
+  .mask-container1 {
+    position: relative;
+    overflow: hidden;
+    .box-top-phone;
+    .box-shadow-phone;
+    position:relative;
+    .img-leftBanner-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+      cursor: pointer;
+      top: 60%;
+      padding: 0px 20px;
+    }
+  }
+}
+
+//针对手机屏幕
+@media screen and (max-width: 767px) {
+  .mask-container {
+    position: relative;
+    overflow: hidden;
+    background:@blue-light;
+    .box-shadow-phone;
+    margin-bottom: 15px;
+    .img-leftBanner-mask {
+      margin-bottom:15px;
+      padding:0px 10px;
+    }
+    h1{font-size: 28px;}
+    p{padding:0px 5px;}
+
+  }
+  .media-box {
+    .box-shadow-phone;
+    padding: 22px 20px;
+    background:@blue-light;
+    .media-left {
+      border-right: 2px solid @blue-lighter;
+      padding: 20px 10px;
+    }
+    .media {
+      >.media-body {
+        padding: 0px 10px;
+        > ul > li {
+          line-height: 28.9px;
+        }
+      }
+    }
+  }
+  .media-box1 {
+    .box-shadow-phone;
+    padding: 21px 20px;
+    background:@blue-light;
+    .media-left {
+      border-right: 2px solid @blue-lighter;
+      padding: 20px 10px;
+    }
+    .media {
+      >.media-body {
+        padding: 0px 10px;
+        > ul > li {
+          line-height: 28.9px;
+        }
+      }
+    }
+  }
+  .mask-container1 {
+    position: relative;
+    overflow: hidden;
+    .box-top-phone;
+    .box-shadow-phone;
+    position:relative;
+    .img-leftBanner-mask {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      color: #fff;
+      cursor: pointer;
+      top: 60%;
+      padding: 0px 20px;
+    }
+  }
+}
+
+//media 电脑端样式
+.box-pc-shadow {
+  -webkit-box-shadow: 8px 8px 0px @blue-darker;
+  -moz-box-shadow: 8px 8px 0px @blue-darker;
+  box-shadow: 8px 8px 0px @blue-darker;
+}
+//手机端样式
+.box-shadow-phone {
+  -webkit-box-shadow: 3px 3px 0px @blue-darker;
+  -moz-box-shadow: 3px 3px 0px @blue-darker;
+  box-shadow: 3px 3px 0px @blue-darker;
+}
+
+.box-top {
+  margin-top: 28px;
+}
+
+.box-top-phone{
+  margin-top: 15px;
+}
+
+
+.left-media {
+  background: @blue-std;
+  padding: 20px;
+}
+
+//footer
+.footer {
+  margin-top: 10px;
+}
+
+div.footer > .container > .row p {
+  font-weight: bold;
+}
+
+div.footer > .container > .row ul li {
+  color: @blue-std;
+  font: 13px/25px 'microsoft yahei';
+}
+
+div.footer > .container > .row + .row {
+  color: #bebebc;
+  font: 12px/25px 'microsoft yahei';
+}
+
+div.container > h2 sup {
+  font-size: 18px;
+}
+
+div.dropdown-menu .containers {
+  width: 90%;
+  margin: 0px auto;
+}
