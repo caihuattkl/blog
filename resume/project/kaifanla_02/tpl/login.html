@@ -1,6 +1,25 @@
-<div ng-include="headerHtml"></div>
-
-<div>1111111111111111111111111111111</div>
-
-
-<div ng-include="footerHtml"></div>
+<div data-role="page" ng-controller="loginCtrl">
+  <div data-role="header" data-position="fixed" role="banner" class="ui-header ui-bar-inherit ui-header-fixed slidedown">
+    <a href="../main.html" data-role="button" data-rel="back" class="ui-btn ui-icon-carat-l ui-shadow ui-corner-all ui-btn-icon-notext"></a>
+    <a href="../tpl/myorder.html" data-icon="user" data-role="button" role="button" class="ui-btn-right ui-link ui-btn ui-icon-user ui-btn-icon-notext ui-shadow ui-corner-all"></a>
+    <h1>登录</h1>
+  </div>
+  <div data-role="content">
+  <div class="login">
+  	<label for="name"><strong>用户名:</strong></label>
+  	<input type="text" name="name" id="name" value="" placeholder="请输入用户名"/>
+  	<label for="password"><strong>密　码:</strong></label>
+  	<input type="password" name="password" id="password" value="" placeholder="请输入密码"/>
+  	<button ng-click="login()">登录</button>
+  </div>
+  </div>
+  <div data-role="footer" data-position="fixed">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="main.html" data-icon="home">首页</a></li>
+        <li><a href="myorder.html" data-icon="gear">订单</a></li>
+        <li><a href="myorder.html" data-icon="user">我</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -11,7 +11,7 @@
         <a href="javascript:void(0)" ng-click="jump2Detail(i.did)">
           <img ng-src="../img/{{i.img_sm}}" alt="" class="ui"/>
           <h3>{{i.name}}</h3>
-          <p>原料：{{i.material}}</p>
+          <p>{{i.did}}.原料：{{i.material}}</p>
           <span>{{i.price | currency : '￥'}}</span>
         </a>
       </li>
@@ -25,7 +25,7 @@
       <ul>
         <li><a href="main.html" data-icon="home">首页</a></li>
         <li><a href="myorder.html" data-icon="gear">订单</a></li>
-        <li><a href="myorder.html" data-icon="user">我</a></li>
+        <li><a href="login.html" data-icon="user">我</a></li>
       </ul>
     </div>
   </div>
