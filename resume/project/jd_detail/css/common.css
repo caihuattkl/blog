@@ -151,7 +151,7 @@ li.service>a {
     background-position:65px center;
     background-repeat:no-repeat;
 }
-li.service>a:hover,.hover {
+li.service>a:hover{
     background-image:url(../images/jt_up.jpg);
     background-color:#fff;
     border:1px solid #DDD;
