@@ -342,36 +342,35 @@ p.special_service {background-position:0px -149px;}
 }
 .authentication {
     margin:12px auto;
-    width:532px;
 }
 .authentication a {
     margin:10px 12px;
-    float:left;
 }
 #footer a:hover {color:#ff0700;}
 
 
 /**************************V06***********************************/
 /*导航部分*/
-nav {
+#nav {
     width:1210px;
     height:40px;
     margin: 10px auto;
     background: #E64346;
     border:1px solid yellow;
+    position: relative;
 }
 #category {
     width:210px;
-    float:left;
     background: #CD2A2C;
     position:absolute;
+    left:0;
 }
 
 /*全部商品分类*/
 #category>a{
-    display: inline-block;
+    
     height: 40px;
-    padding-left    : 20px;
+    padding-left: 20px;
     line-height: 40px;
    color: #fff;
    font-size:14px;
@@ -391,6 +390,8 @@ nav {
 
 /*其他导航项*/
 #nav_items {
+	width:100%;
+	background: #CD2A2C;
     float:left;
     padding-left:220px;
 }
