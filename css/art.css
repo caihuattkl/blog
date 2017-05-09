@@ -22,7 +22,6 @@ li,
 pre,
 fieldset,
 lengend,
-button,
 input,
 textarea,
 form,
@@ -30,7 +29,6 @@ th,
 td{margin: 0;
   padding: 0}
 body,
-button,
 input,
 select,
 textarea{font: 12px/1.5 Tahoma, Arial, "\5b8b\4f53", sans-serif}
@@ -243,29 +241,43 @@ img{-ms-interpolation-mode: bicubic;
   margin: 0 auto;
   clear: both}
 /*place begin*/
-.place{border: 1px #dcdcdc solid;
+.place {
+  border: 1px #dcdcdc solid;
   padding: 0 0 0 10px;
   height: 31px;
   line-height: 31px;
   border-radius: 3px;
   margin-top: 10px;
-  overflow: hidden}
-.item a:hover{color: #c70000}
-.here{font-family: "\5b8b\4f53";
-  position: relative}
-.here span,
-.here a{margin: 0 5px;
-  color: #696969}
-.here a:hover{color: #c70000;
-  text-decoration: none}
-.online-cont{padding-top: 4px}
-.online-cont a{background-color: #ccc}
-.online-cont a{margin-right: 10px;
+  overflow: hidden;
+}
+.place_info {
+  margin-top: 10px;
+}
+.place_info ul li {
   display: inline-block;
-  width: 81px;
-  height: 24px}
-.online-cont a.qq-cont{background-position: right -32px}
-.online-cont a.leave-words{background-position: right -56px}
+}
+.place_info ul li + li {
+  margin-left: 6px;
+}
+.item a:hover {
+  color: #c70000;
+}
+.here {
+  font-family: "\5b8b\4f53";
+  position: relative;
+}
+.here span,
+.here a {
+  margin: 0 5px;
+  color: #696969;
+}
+.here a:hover {
+  color: #c70000;
+  text-decoration: none;
+}
+.online-cont {
+  padding-right: 4px;
+}
 /*place end*/
 .gt{font: bold 11px \5B8B\4F53 !important;
   color: #fff;
