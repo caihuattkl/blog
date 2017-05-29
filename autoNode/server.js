@@ -6,7 +6,7 @@ http.createServer(function(req, res) {
     'content-Type': 'text/plain;charset=utf-8'
   });
   
-  setInterval(autoPushGit,1000*10)
+  setInterval(autoPushGit,1000*60)
   autoPushGit();
   
   res.end("执行脚本程序启动成功")
