@@ -13,7 +13,6 @@ http.createServer(function(req, res) {
 }).listen(88);
 console.log('执行脚本程序启动成功,请使用localhost:88端口访问!')
 
-
 async function runCmd() {
   //需要执行的命令字符串
   var cli1 = 'git add -A';
