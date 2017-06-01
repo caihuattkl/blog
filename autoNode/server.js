@@ -35,15 +35,15 @@ String.prototype.each = function(i, fun) {
 
 function Cmd(cli) {
   return new Promise(function(resolve, reject) {
-    exec(cli, {encoding: 'hex'}, function(err, stdouts) {
+    exec(cli, {encoding: 'hex'}, function(err, stdouts,stderr) {
       if(err) {
         return reject(err);
       }
-      let arr = [];
-      stdouts.each(2, function(data) {
-        arr.push(parseInt(data, 16));
-      });
-      return resolve(iconv.decode(new Buffer(arr),'GBK'))
+//    let arr = [];
+//    stdouts.each(2, function(data) {
+//      arr.push(parseInt(data, 16));
+//    });iconv.decode(new Buffer(arr),'GBK')
+      return resolve(stdouts,stderr)
     })
   })
 }
