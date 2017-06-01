@@ -1,6 +1,7 @@
 const execFile = require('child_process').execFile;
 const exec = require('child_process').exec;
 const http = require('http');
+const iconv = require('iconv-lite');
 
 http.createServer(function(req, res) {
   res.writeHeader(200, {
@@ -8,37 +9,45 @@ http.createServer(function(req, res) {
   });
   runCmd()
   //setInterval(autoPushGit, 1000 * 60)
-  autoPushGit();
-
+  //autoPushGit();
   res.end("执行脚本程序启动成功")
 
 }).listen(88);
 console.log('执行脚本程序启动成功,请使用localhost:88端口访问!')
 
-function autoPushGit() {
-  execFile('autoPushGit.bat', {
-    encoding: 'utf8'
-  }, function(err, stdout, stderr) {
-    if(err) {
-      console.log(err);
-      return;
-    }
-    console.log('执行返回:' + stdout);
 
-  });
+async function runCmd() {
+  //需要执行的命令字符串
+  var cli1 = 'git add -A';
+  var cli2 = 'git commit -m "add info"';
+  var cli3='git push origin';
+  var cmd1=await Cmd(cli1);
+  var cmd2=await Cmd(cli2);
+  console.log(cmd2)
 }
 
-function runCmd() {
-  //需要执行的命令字符串
-  var cli = 'ipconfig systeminfo';
-  exec(cli, {
-    encoding: 'utf8'
-  }, function(err, stdout, stderr) {
-    if(err) {
-      console.log(err);
-      return;
-    }
-    console.log('stdout' + stdout);
-    console.log('stderr' + stderr);
+String.prototype.each = function(i, fun) {
+  var index = 0;
+  var that = this;
+  while(index <= that.length) {
+    (fun || function() {})(that.substr(index, i))
+    index += i;
+  }
+}
+
+function Cmd(cli) {
+  return new Promise(function(resolve, reject) {
+    exec(cli, {
+      encoding: 'hex'
+    }, function(err, stdout) {
+      if(err) {
+        return reject(err);
+      }
+      let arr = [];
+      stdout.each(2, function(data) {
+        arr.push(parseInt(data, 16));
+      });
+      return resolve(iconv.decode(new Buffer(arr),'GBK'))
+    })
   })
 }
