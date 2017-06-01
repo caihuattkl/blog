@@ -21,7 +21,8 @@ async function runCmd() {
   var cli3='git push origin';
   var cmd1=await Cmd(cli1);
   var cmd2=await Cmd(cli2);
-  console.log(cmd2)
+  var cmd3=await Cmd(cli3);
+  console.log(cmd3)
 }
 
 String.prototype.each = function(i, fun) {
@@ -35,14 +36,12 @@ String.prototype.each = function(i, fun) {
 
 function Cmd(cli) {
   return new Promise(function(resolve, reject) {
-    exec(cli, {
-      encoding: 'hex'
-    }, function(err, stdout) {
+    exec(cli, {encoding: 'hex'}, function(err, stdouts) {
       if(err) {
         return reject(err);
       }
       let arr = [];
-      stdout.each(2, function(data) {
+      stdouts.each(2, function(data) {
         arr.push(parseInt(data, 16));
       });
       return resolve(iconv.decode(new Buffer(arr),'GBK'))
