@@ -17,10 +17,10 @@ async function runCmd() {
   //需要执行的命令字符串
   var cli1 = 'git add -A';
   var cli2 = 'git commit -m "add info"';
-  var cli3='git push origin';
+//var cli3='git push origin';
   var cmd1=await Cmd(cli1);
   var cmd2=await Cmd(cli2);
-  var cmd3=await Cmd(cli3);
+//var cmd3=await Cmd(cli3);
   console.log(cmd3)
 }
 
@@ -43,7 +43,10 @@ function Cmd(cli) {
 //    stdouts.each(2, function(data) {
 //      arr.push(parseInt(data, 16));
 //    });iconv.decode(new Buffer(arr),'GBK')
-      return resolve(stdouts,stderr)
+      if(stderr){
+      	return resolve(stderr)
+      }
+      return resolve(stdouts)
     })
   })
 }
