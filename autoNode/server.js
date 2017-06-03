@@ -37,7 +37,7 @@ function Cmd(cli) {
   return new Promise(function(resolve, reject) {
     exec(cli, {encoding: 'hex'}, function(err, stdouts,stderr) {
       if(err) {
-        return reject('err:',err);
+        return reject('err',err);
       }
 //    let arr = [];
 //    stdouts.each(2, function(data) {
