@@ -110,7 +110,8 @@ body {
   border-radius: 50%;
   margin: 2% auto;
   background-size: contain;
-  background: url("http://www.flqin.com/img/photo.jpg");
+  background: url("/images/photo.jpeg");
+  background-size: cover;
   -webkit-transition: box-shadow 0.5s linear;
   transition: box-shadow 0.5s linear;
 }
